@@ -1,7 +1,7 @@
 import styles from './Dropdown.module.css';
 
-const Dropdown = ({ children }) => {
-  return <div className={styles['dropdown-area']}>{children}</div>;
+const Dropdown = ({ ref, children }) => {
+  return <div className={styles['dropdown-area']} ref={ref}>{children}</div>;
 };
 
 const ProfileDrop = ({ isExpand, onClick, selected, disabled }) => {

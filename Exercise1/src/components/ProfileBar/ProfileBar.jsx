@@ -15,7 +15,7 @@ const ProfileBar = () => {
 
   const inputRef = useRef(null);
   const menuToggleRef = useRef(null);
-
+  const dropdownRef = useRef(null);
   useEffect(() => {
     if (mode === 'rename' && inputRef.current) {
       inputRef.current.focus();
@@ -32,6 +32,11 @@ const ProfileBar = () => {
     if (e.key === 'Enter') handleRename();
   };
 
+  useClickOutside(dropdownRef, () => {
+    if (mode === 'dropdown') {
+      setMode(null);
+    }
+  });
   return (
     <div className='profile-bar flex'>
       <div className='loader'></div>
@@ -50,7 +55,7 @@ const ProfileBar = () => {
         />
       )}
 
-      <Dropdown>
+      <Dropdown ref={dropdownRef}>
         <Dropdown.ProfileDrop
           isExpand={mode === 'dropdown'}
           selected={selected.name}
