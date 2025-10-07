@@ -91,7 +91,10 @@ const ProfileBar = () => {
               setMode('rename');
               setInputValue(selected.name);
             }}
-            onDuplicate={duplicateProfile}
+            onDuplicate={() => {
+              duplicateProfile();
+              setMode(null);
+            }}
             onDelete={() => setMode('delete')}
             onClose={() => setMode(null)}
             menuToggleRef={menuToggleRef}
