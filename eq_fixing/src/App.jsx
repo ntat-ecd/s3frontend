@@ -1,5 +1,5 @@
+//import './assets/css/main.css';
 import { Route, Routes } from 'react-router-dom';
-import './assets/css/main.css';
 import Navbar from './components/Navbar/Navbar';
 import SoundPage from './pages/SoundPage';
 import MixerPage from './pages/MixerPage';
@@ -16,7 +16,7 @@ function App() {
     <>
       <MainContainer>
         <Navbar />
-        <div className='body-wrapper scrollable'>
+        <div className='body-wrapper'>
           <Routes>
             <Route path='/sound' element={<SoundPage />} />
             <Route path='/mixer' element={<MixerPage />} />

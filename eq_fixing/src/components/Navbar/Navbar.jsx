@@ -13,7 +13,7 @@ const links = [
 
 const Navbar = () => {
   return (
-    <div className={`${styles['nav-tabs']} flex`}>
+    <div className={`${styles['nav-tabs']} flex app-header`}>
       <div className={`${styles.nav} ${styles.arrow} ${styles.back}`}></div>
       <div className={`${styles.nav} ${styles.arrow} ${styles.forward} ${styles.disabled}`}></div>
 

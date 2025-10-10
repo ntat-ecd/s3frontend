@@ -1,5 +1,5 @@
 /* Global CSS */
- #root {
+#root {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -32,6 +32,9 @@ body {
   font-size: 16px;
   user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
   margin: 0;
+}
+.app-header {
+  flex-shrink: 0; /* This is the key: it prevents the header from ever shrinking vertically. */
 }
 div {
   box-sizing: border-box; /* Opera/IE 8+ */
@@ -133,17 +136,21 @@ div.flex-end {
   width: 100%;
   background-color: #222;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow-y: hidden;
 }
 .body-wrapper {
+  flex: 1;
+  min-height: 0;
   max-width: 1920px;
-  min-height: 652px;
+  /* min-height: 652px; */
+  /* min-width: 1024px; */
   position: fixed;
   width: 100%;
-  min-width: 1024px;
   top: 48px;
   bottom: 30px;
   padding: 20px;
-  overflow-y: auto;
 }
 .name-bar {
   position: absolute;
@@ -374,12 +381,10 @@ div.flex-end {
 }
 
 /* scroll bar */
-#profileList {
-  max-height: 204px;
-}
+
 .scrollable {
   overflow-y: auto;
-  overflow-x: hidden;
+  overflow-x: auto;
 }
 ::-webkit-scrollbar {
   width: 8px;

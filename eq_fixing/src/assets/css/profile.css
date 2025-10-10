@@ -1,20 +1,29 @@
 .thx-drawer {
+  position: relative;
+  
+  min-height: 300px;
   width: 240px;
   max-width: 240px;
-  padding: 20px;
+  
   background-color: #111;
-  flex-direction: column;
-  position: relative;
+  
+  padding: 20px;
   z-index: 99;
+  
+  flex-direction: column;
+
 }
 .drawer-select {
+  position: relative;
   border: 1px solid #5d5d5d;
   width: 200px;
-  max-height: 220px;
-  height: 220px;
-  flex-direction: column;
-  position: relative;
   margin-bottom: 1.25rem;
+  min-height: 200px;
+  /* max-height: 90%;
+  height: 90%; */
+  
+  flex:1;
+  flex-direction: column;
 }
 .thx-puller-border {
   z-index: 100;
@@ -56,6 +65,7 @@
   background-color: #222;
   border-top: 1px solid #707070;
   display: flex;
+  flex:0;
   flex-direction: row-reverse;
 }
 .drawer-select .icon {
@@ -269,7 +279,7 @@ input.profile-item:active {
   border: 1px solid rgba(0, 0, 0, 0.3);
 }
 #profileList {
-  max-height: 189px;
+  /* max-height: 189px; */
   position: relative;
   width: 100%;
 }
@@ -345,6 +355,7 @@ div.flex > div {
   position: relative;
   left: 0px;
   max-height: 640px;
+  min-width: 320px;
   overflow-y: auto;
   overflow-x: hidden;
 }
