@@ -1,29 +1,64 @@
+/* THX things */
+.thx-body {
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+.thx-wrapper {
+  width: 100vw;
+  flex-direction: row;
+
+  min-height: 0;
+  max-height: 800px;
+
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+.thx-window {
+  position: relative;
+  z-index: 98;
+  min-height: 0;
+  max-height: 100%;
+  min-width: 320px;
+
+  padding: 20px 80px 20px 80px;
+  background-color: #222;
+  left: 0px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
 .thx-drawer {
   position: relative;
-  
-  min-height: 300px;
-  width: 240px;
+  height: 80vh;
+  width: 80vw;
+  min-width: 240px;
+  min-height: 0px;
+
   max-width: 240px;
-  
+
   background-color: #111;
-  
+
   padding: 20px;
   z-index: 99;
-  
-  flex-direction: column;
 
+  flex-direction: column;
+  overflow-x: auto;
 }
 .drawer-select {
   position: relative;
   border: 1px solid #5d5d5d;
   width: 200px;
-  margin-bottom: 1.25rem;
-  min-height: 200px;
+  min-height: 0px;
+
+  /* margin-bottom: 1.25rem; */
   /* max-height: 90%;
   height: 90%; */
-  
-  flex:1;
+
+  flex: 1;
   flex-direction: column;
+  justify-content: space-between;
 }
 .thx-puller-border {
   z-index: 100;
@@ -65,7 +100,7 @@
   background-color: #222;
   border-top: 1px solid #707070;
   display: flex;
-  flex:0;
+  flex: 0;
   flex-direction: row-reverse;
 }
 .drawer-select .icon {
@@ -82,7 +117,7 @@
 }
 .toolbar .icon {
   will-change: opacity;
-  transition: opacity .3s linear;
+  transition: opacity 0.3s linear;
 }
 .toolbar .icon.add {
   background-image: url('../img_ui/icon_plus.svg');
@@ -279,86 +314,17 @@ input.profile-item:active {
   border: 1px solid rgba(0, 0, 0, 0.3);
 }
 #profileList {
-  /* max-height: 189px; */
+  max-height: 95%;
+  min-height: 0;
   position: relative;
   width: 100%;
+  flex: 1;
 }
 
 /* From eq/main.CSS */
 /* global */
-html,
-body {
-  background-color: #666;
-  color: #ccc;
-  font-family: 'Roboto', sans-serif;
-  font-size: 16px;
-  user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
-  margin: 0;
-}
-html {
-  scroll-behavior: smooth;
-}
-div {
-  box-sizing: border-box; /* Opera/IE 8+ */
-}
-::selection {
-  background: rgba(68, 214, 44, 0.3);
-}
-input:focus,
-select:focus,
-textarea:focus,
-button:focus {
-  outline: none;
-}
-.dim {
-  color: #707070;
-}
 
-/* flex */
-div.flex {
-  display: flex;
-}
-div.flex > div {
-  flex: auto;
-}
-.flex-row-20 {
-  min-width: 20px;
-  max-width: 20px;
-  height: 5px;
-}
-.flex-col-30 {
-  min-height: 30px;
-  max-height: 30px;
-  width: 5px;
-}
 
-/* container */
-.thx-body {
-  width: 100%;
-  flex-direction: column;
-  align-items: center;
-}
-.thx-wrapper {
-  width: 100%;
-  flex-direction: row;
-  min-height: 640px;
-  max-height: 640px;
-}
-.main-container {
-  width: 1000px;
-  height: 688px;
-}
-.thx-window {
-  z-index: 98;
-  background-color: #222;
-  padding: 20px 80px 20px 80px;
-  position: relative;
-  left: 0px;
-  max-height: 640px;
-  min-width: 320px;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
 .insert-ref {
   display: none;
 }
@@ -464,11 +430,6 @@ div.flex > div {
   text-align: center;
 }
 
-/* scroll bar */
-.scrollable {
-  overflow-y: auto;
-  overflow-x: hidden;
-}
 ::-webkit-scrollbar {
   width: 8px;
 }
