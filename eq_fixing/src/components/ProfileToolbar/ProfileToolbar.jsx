@@ -45,6 +45,7 @@ const ProfileToolbar = () => {
   };
   const toggleDeleteModal = (e) => {
     e.stopPropagation();
+    console.log(modalPosition)
     setIsDeleteModalVisible(!isDeleteModalVisible);
   };
 
@@ -62,11 +63,22 @@ const ProfileToolbar = () => {
     }
   };
 
-  //useClickOutside logic
+  //useClickOutside and delete modal logic
   const iconDeleteRef = useRef(null);
   const modalRef = useRef(null);
   useClickOutside([modalRef, iconDeleteRef], closeModal);
   const iconEditRef = useRef(null);
+  const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
+  useEffect(() => {
+    if (isDeleteModalVisible && iconDeleteRef.current) {
+      const buttonRect = iconDeleteRef.current.getBoundingClientRect();
+
+      const top = buttonRect.top-250;
+      const left = buttonRect.left-30;
+
+      setModalPosition({ top, left });
+    }
+  }, [isDeleteModalVisible]);
   return (
     <>
       <div className='toolbar flex'>
@@ -97,7 +109,7 @@ const ProfileToolbar = () => {
       </div>
       {/* DELETE MODAL */}
       {isDeleteModalVisible && (
-        <div ref={modalRef} className='profile-del alert flex show' style={{ top: '205px', left: '125px' }}>
+        <div ref={modalRef} className='profile-del alert flex show' style={modalPosition}>
           <div className='title'>Delete EQ Profile</div>
           <div className='body-text t-center'>{selectedProfile?.name}</div>
           <div className='thx-btn' onClick={() => handleDelete(selectedProfileId)}>

@@ -44,7 +44,7 @@
   z-index: 99;
 
   flex-direction: column;
-  overflow-x: auto;
+  
 }
 .drawer-select {
   position: relative;
@@ -180,13 +180,17 @@
     color 0.2s,
     background-color 0.2s;
 }
+
 input.profile-item {
+  position: absolute;
+  top: 0;
+  
   z-index: 30;
   font-family: 'Roboto', sans-serif;
-  position: absolute;
+
   display: none;
   width: calc(100% - 30px);
-  margin-left: 30px;
+  margin-left: -6px; 
   border: 1px solid #44d62c;
   box-sizing: border-box;
   background-color: #111 !important;
@@ -194,7 +198,7 @@ input.profile-item {
   line-height: 20px;
 }
 input.profile-item.show {
-  display: inline-block;
+  display: block;
 }
 .profile-item:hover {
   cursor: pointer;
@@ -266,9 +270,11 @@ input.profile-item:active {
   left: 67px;
 }
 .profile-del {
+  position: absolute;
+  z-index: 999;
+
   flex-direction: column;
   align-items: center;
-  position: relative;
   width: 300px;
   background-color: #111;
   border: 1px solid #c8323c;
@@ -323,7 +329,6 @@ input.profile-item:active {
 
 /* From eq/main.CSS */
 /* global */
-
 
 .insert-ref {
   display: none;
