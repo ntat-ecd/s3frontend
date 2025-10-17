@@ -1,5 +1,5 @@
+//import './assets/css/main.css'
 import { Route, Routes } from 'react-router-dom';
-import './assets/css/main.css';
 import Navbar from './components/Navbar/Navbar';
 import SoundPage from './pages/SoundPage';
 import MixerPage from './pages/MixerPage';

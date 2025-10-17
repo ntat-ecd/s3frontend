@@ -1,4 +1,5 @@
 .thx-drawer {
+  flex-shrink: 0;
   width: 240px;
   max-width: 240px;
   padding: 20px;
@@ -10,7 +11,7 @@
 .drawer-select {
   border: 1px solid #5d5d5d;
   width: 200px;
-  max-height: 220px;
+  max-height: 100%;
   height: 220px;
   flex-direction: column;
   position: relative;
@@ -49,10 +50,10 @@
   background-image: url('../img_ui/puller_w.png');
 }
 .drawer-select .toolbar {
-  position: relative;
+  position: absolute;
   bottom: 0px;
   width: 100%;
-  max-height: 29px;
+  /* max-height: 29px; */
   background-color: #222;
   border-top: 1px solid #707070;
   display: flex;
@@ -72,7 +73,7 @@
 }
 .toolbar .icon {
   will-change: opacity;
-  transition: opacity .3s linear;
+  transition: opacity 0.3s linear;
 }
 .toolbar .icon.add {
   background-image: url('../img_ui/icon_plus.svg');
@@ -138,7 +139,7 @@
 input.profile-item {
   z-index: 30;
   font-family: 'Roboto', sans-serif;
-  position: relative;
+  /* position: relative; */
   display: none;
   width: calc(100% - 30px);
   margin-left: 30px;
@@ -149,7 +150,11 @@ input.profile-item {
   line-height: 20px;
 }
 input.profile-item.show {
-  display: block;
+  display: inline;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
 }
 .profile-item:hover {
   cursor: pointer;
@@ -269,25 +274,15 @@ input.profile-item:active {
   border: 1px solid rgba(0, 0, 0, 0.3);
 }
 #profileList {
-  max-height: 189px;
+  max-height: 95%;
   position: relative;
   width: 100%;
 }
 
 /* From eq/main.CSS */
 /* global */
-html,
-body {
-  background-color: #666;
-  color: #ccc;
-  font-family: 'Roboto', sans-serif;
-  font-size: 16px;
-  user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
-  margin: 0;
-}
-html {
-  scroll-behavior: smooth;
-}
+
+
 div {
   box-sizing: border-box; /* Opera/IE 8+ */
 }
@@ -329,16 +324,13 @@ div.flex > div {
   align-items: center;
 }
 .thx-wrapper {
+  min-height: 652px;
   width: 100%;
   flex-direction: row;
-  min-height: 640px;
-  max-height: 640px;
-}
-.main-container {
-  width: 1000px;
-  height: 688px;
+
 }
 .thx-window {
+  flex: 1;
   z-index: 98;
   background-color: #222;
   padding: 20px 80px 20px 80px;
@@ -585,4 +577,16 @@ div.flex > div {
 .lite-overlay.on .overlay-tips {
   visibility: visible;
   opacity: 1;
+}
+
+/* for input to overlay, not replacing */
+.profile-item-overlay {
+  /* Position it absolutely within the parent .profile-item */
+  position: absolute;
+  top: 0;
+  left: 36px; /* Match the padding of the parent to align with the text */
+
+  /* Make it fill the available space */
+  width: calc(100% - 36px); /* Adjust width to account for the left offset */
+  height: 100%;
 }

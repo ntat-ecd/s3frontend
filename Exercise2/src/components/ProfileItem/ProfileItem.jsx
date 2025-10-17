@@ -26,32 +26,60 @@ const ProfileItem = ({ profile, isSelected, onSelect }) => {
     if (e.key === 'Escape') handleCancel();
   };
   useClickOutside(inputRef, handleSave);
-  if (isEditing) {
-    return (
-      <input
-        ref={inputRef}
-        type='text'
-        id='profileRename'
-        className='profile-item show'
-        placeholder='Enter Profile Name'
-        maxLength={25}
-        // style={{top: '210px'}}
-        value={editText}
-        onChange={(e) => setEditText(e.target.value)}
-        onKeyDown={handleKeyDown}
-        onBlur={() => {
-          handleSave();
-          handleCancel();
-        }}
-        autoFocus
-      />
-    );
-  }
+
   return (
     <div className={`profile-item ${profileTypeClass} ${isSelected ? 'active' : ''}`} onClick={onSelect}>
       {profile.name}
+
+      {isEditing && (
+        <input
+          ref={inputRef}
+          type='text'
+          id='profileRename'
+          className='profile-item show'
+          placeholder='Enter Profile Name'
+          maxLength={25}
+          value={editText}
+          onChange={(e) => setEditText(e.target.value)}
+          onKeyDown={handleKeyDown}
+          onBlur={() => {
+            handleSave();
+            handleCancel();
+          }}
+          autoFocus
+        />
+      )}
     </div>
   );
 };
 
 export default ProfileItem;
+
+//   if (isEditing) {
+//     return (
+//       <input
+//         ref={inputRef}
+//         type='text'
+//         id='profileRename'
+//         className='profile-item show'
+//         placeholder='Enter Profile Name'
+//         maxLength={25}
+//         // style={{top: '210px'}}
+//         value={editText}
+//         onChange={(e) => setEditText(e.target.value)}
+//         onKeyDown={handleKeyDown}
+//         onBlur={() => {
+//           handleSave();
+//           handleCancel();
+//         }}
+//         autoFocus
+//       />
+//     );
+//   }
+//   return (
+//     <div className={`profile-item ${profileTypeClass} ${isSelected ? 'active' : ''}`} onClick={onSelect}>
+//       {profile.name}
+//     </div>
+//   );
+// };
+// export default ProfileItem;

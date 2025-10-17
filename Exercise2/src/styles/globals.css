@@ -1,5 +1,5 @@
 /* Global CSS */
- #root {
+#root {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -19,19 +19,20 @@
 /* global */
 html,
 body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-width: 1024px;
+  max-width: 1920px;
+  height: 100%;
+
   background-color: #666;
   /*background-color: #fff;*/
   color: #ccc;
-  min-width: 1024px;
-  min-height: 730px;
-  width: 100%;
-  max-width: 1920px;
-  height: 100%;
   overflow: hidden;
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
   user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
-  margin: 0;
 }
 div {
   box-sizing: border-box; /* Opera/IE 8+ */
@@ -127,27 +128,23 @@ div.flex-end {
 
 /* container */
 .main-container {
-  min-width: 1024px;
-  min-height: 730px;
   height: 100%;
   width: 100%;
   background-color: #222;
   position: relative;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 .body-wrapper {
-  max-width: 1920px;
+  flex: 1;
+  display: flex;
   min-height: 652px;
-  position: fixed;
   width: 100%;
-  min-width: 1024px;
-  top: 48px;
-  bottom: 30px;
   padding: 20px;
-  overflow-y: auto;
 }
 .name-bar {
-  position: absolute;
-  bottom: 0px;
+  flex-shrink: 0;
   width: 100%;
   min-width: 1024px;
   background-color: #2b2b2b;
@@ -160,6 +157,7 @@ div.flex-end {
   padding: 0.5rem 0;
   text-align: center;
   color: #707070;
+  z-index: 99;
 }
 .insert-ref {
   display: none;
@@ -374,9 +372,6 @@ div.flex-end {
 }
 
 /* scroll bar */
-#profileList {
-  max-height: 204px;
-}
 .scrollable {
   overflow-y: auto;
   overflow-x: hidden;

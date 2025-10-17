@@ -45,7 +45,6 @@ const ProfileToolbar = () => {
   };
   const toggleDeleteModal = (e) => {
     e.stopPropagation();
-    console.log(modalPosition)
     setIsDeleteModalVisible(!isDeleteModalVisible);
   };
 
@@ -75,7 +74,7 @@ const ProfileToolbar = () => {
 
       const top = buttonRect.top-250;
       const left = buttonRect.left-30;
-
+      console.log(modalPosition)
       setModalPosition({ top, left });
     }
   }, [isDeleteModalVisible]);
@@ -92,7 +91,7 @@ const ProfileToolbar = () => {
               onMouseDown={(e) => handleEdit(e, selectedProfileId)}
             ></div>
 
-            <div className='icon delete show' id='profileDelete' ref={iconDeleteRef} onClick={toggleDeleteModal}></div>
+            <div className='icon delete show' id='profileDelete' onClick={toggleDeleteModal} ref={iconDeleteRef}></div>
           </>
         )}
 

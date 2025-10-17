@@ -11,7 +11,7 @@ const loadState = () => {
     if (serializedState === null) return undefined;
     return JSON.parse(serializedState);
   } catch (err) {
-    console.error('Could not load sate', err);
+    console.error('Could not load state', err);
     return undefined;
   }
 };
