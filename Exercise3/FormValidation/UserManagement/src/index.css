@@ -228,6 +228,10 @@ h2 {
 button.addUserBtn{
   justify-content: space-between;
 }
+
+button.submit{
+  margin-top: 20px;
+}
 /* TICKBOX */
 
 .tickbox {

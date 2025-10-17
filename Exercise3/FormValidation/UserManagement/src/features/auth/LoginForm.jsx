@@ -41,7 +41,7 @@ const LoginForm = () => {
   }, []);
 
   useEffect(() => {
-    if (isAuthenticated) navigate("dashboard");
+    if (isAuthenticated) navigate("/dashboard");
   }, [isAuthenticated, navigate]);
 
   const handleLogin = (formValues) => {
