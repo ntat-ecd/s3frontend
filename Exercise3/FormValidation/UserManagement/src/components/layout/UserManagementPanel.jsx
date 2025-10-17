@@ -2,7 +2,7 @@ import ActionGroup from "../common/ActionGroup";
 import Button from "../common/Button";
 import Tickbox from "../common/Tickbox";
 import Table from "../table/Table";
-import { fetchUsers, toggleUserStatus } from "../../features/users/usersSlice";
+import { fetchUsers, toggleUserStatus, deleteUser } from "../../features/users/usersSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import ConfirmationModal from "../common/ConfirmationModal";
@@ -34,7 +34,7 @@ const UserManagementPanel = () => {
   //on confirm button clicked
   const handleConfirmDelete = () => {
     const { user } = modalState.props;
-    if (user) dispatch(deleteUser.user.id);
+    if (user) dispatch(deleteUser(user.id));
     closeModal();
   };
 

@@ -83,7 +83,7 @@ export const setupServer = () => {
       //DELETE
       this.delete("/users/:id", (schema, request) => {
         const id = request.params.id;
-        userToDelete = schema.users.find(id);
+        const userToDelete = schema.users.find(id);
 
         if (!userToDelete) return new Response(404, {}, "User not found");
 
