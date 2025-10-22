@@ -3,7 +3,7 @@ import Button from "../common/Button";
 import Tickbox from "../common/Tickbox";
 import Table from "../table/Table";
 import {
-  getUsers,
+  addUser,
   updateUser,
   deleteUser,
 } from "../../features/users/usersSlice";
@@ -16,7 +16,7 @@ import UserFormModal from "../../features/users/UserFormModal";
 const UserManagementPanel = () => {
   const dispatch = useDispatch();
   const { users, status } = useSelector((state) => state.users);
-  const newId = useSelector((state) => state.users.users.length + 2);
+  const newId = Date.now();
   const EMPTY_USER = {
     id: newId,
     name: "",
@@ -28,29 +28,12 @@ const UserManagementPanel = () => {
   //MODAL logic and helper
   const [modalState, setModalState] = useState({ type: null, props: {} });
   const openModal = (type, props) => {
-    // console.log(
-    //   "Modal opened in mode: ",
-    //   type,
-    //   "\nprops: ",
-    //   props,
-    //   "\ntypofprops: ",
-    //   typeof props,
-    //   "\n!props: ",
-    //   !props,
-    //   "\nJSON.stringify(user) === '{}': ",
-    //   JSON.stringify(props) === "{}"
-    // );
+    
     setModalState({ type, props });
   };
   const closeModal = () => {
     setModalState({ type: null, props: {} });
   };
-
-  useEffect(() => {
-    if (status === "idle") {
-      dispatch(getUsers());
-    }
-  }, [status, dispatch]);
 
   //on confirm button clicked
   const handleConfirmToggle = () => {
@@ -70,11 +53,12 @@ const UserManagementPanel = () => {
 
   const handleAddUser = (formData) => {
     dispatch(addUser(formData));
+    closeModal();
   };
 
   const handleEditUser = (formData) => {
     dispatch(updateUser(formData));
-    closeModal()
+    closeModal();
   };
 
   const handleRowClick = (user) => {
@@ -105,13 +89,13 @@ const UserManagementPanel = () => {
     {
       key: "phoneNumber",
       title: "Số điện thoại",
-      width: "1fr",
+      width: "1.5fr",
       render: (row) => row.phoneNumber,
     },
     {
       key: "updatedAt",
       title: "Ngày cập nhật",
-      width: "200px",
+      width: "150px",
       render: (row) => row.updatedAt,
     },
     {

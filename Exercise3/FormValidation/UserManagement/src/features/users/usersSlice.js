@@ -64,7 +64,7 @@ const usersSlice = createSlice({
   reducers: {
     addUser: (state, action) => {
       const newUser = action.payload;
-      newUser.id = state.users.length + 2;
+      newUser.id = Date.now()
       newUser.updatedAt = new Date().toLocaleDateString();
       state.users.push(newUser);
     },

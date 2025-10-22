@@ -4,7 +4,11 @@ import { useForm } from "../../hooks/useForm";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
-import { registerUser, resetRegistrationStatus } from "./authSlice";
+import {
+  firstMountCleanup,
+  registerUser,
+  resetRegistrationStatus,
+} from "./authSlice";
 
 import Button from "../../components/common/Button";
 import Input from "../../components/common/Input";
@@ -55,6 +59,7 @@ const SignUpForm = () => {
   //on very first mount cleanup
   useEffect(() => {
     dispatch(resetRegistrationStatus());
+    dispatch(firstMountCleanup());
   }, [dispatch]);
 
   const handleRegister = (formValues) => {
@@ -87,6 +92,7 @@ const SignUpForm = () => {
   return (
     <form onSubmit={handleSubmit} id="signupForm" className="form">
       <h2>đăng ký</h2>
+      {authError && <div className="error">{authError}</div>}
 
       <Input
         label={"Tên"}

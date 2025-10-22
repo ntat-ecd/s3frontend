@@ -24,11 +24,12 @@ export const registerUser = createAsyncThunk(
     const state = getState();
     const allUsers = state.users.users;
     const existingUser = allUsers.find(
-      (user) => user.email === userData.userEmail
+      (user) =>
+        user.email === userData.userEmail || user.name === userData.userName
     );
 
     if (existingUser) {
-      return rejectWithValue("Email already exists.");
+      return rejectWithValue("Email or username has already existed.");
     }
 
     const newUser = {
