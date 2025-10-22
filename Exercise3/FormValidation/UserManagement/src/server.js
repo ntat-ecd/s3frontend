@@ -44,6 +44,15 @@ export const setupServer = () => {
     routes() {
       this.namespace = "api";
       //---AUTH ROUTE---
+      //SIGN UP
+      this.post("/register", (schema, request) => {
+        const payload = JSON.parse(request.requestBody);
+
+        //check for existing user
+
+        const existingUser = schema.authUser;
+      });
+      //SIGN IN
       this.post("/login", (schema, request) => {
         const { userName, userPassword } = JSON.parse(request.requestBody);
 
@@ -90,8 +99,11 @@ export const setupServer = () => {
         userToDelete.destroy();
         return new Response(204);
       });
+
+      //DEBUGGING
+      this.get("/_debug/db", (schema) => schema.db.dump());
     },
   });
-
+  window.server = server;
   return server;
 };

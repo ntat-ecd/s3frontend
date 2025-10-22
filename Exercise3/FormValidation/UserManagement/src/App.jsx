@@ -1,16 +1,20 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Link } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import LoginPage from "./pages/LoginPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import ProtectedRoute from "./components/common/ProtectedRoute";
-
+import SignUpPage from "./pages/SignUpPage";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <LoginPage />,
   },
   {
-    element: <ProtectedRoute/>,
+    path: "/signup",
+    element: <SignUpPage />,
+  },
+  {
+    element: <ProtectedRoute />,
     children: [
       {
         path: "/dashboard",

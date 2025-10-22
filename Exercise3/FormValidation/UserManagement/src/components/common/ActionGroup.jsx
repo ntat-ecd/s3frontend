@@ -3,7 +3,7 @@ const ActionGroup = ({ user, onOpenModal }) => {
     onOpenModal("DELETE_USER", { user });
   };
   const handleEditClick = () => {
-    //will add later
+    onOpenModal("edit", { user });
   };
   return (
     <div className="actionGroup">

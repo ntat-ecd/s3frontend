@@ -1,98 +1,89 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { act } from "react";
-
-export const fetchUsers = createAsyncThunk(
-  "users/fetchUsers",
-  async (_, { rejectWithValue }) => {
-    try {
-      const response = await fetch("/api/users");
-      const data = await response.json();
-      if (!response.ok)
-        return rejectWithValue(data.message || "Failed to fetch users.");
-      return data.users;
-    } catch (error) {
-      return rejectWithValue("Network error occurred");
-    }
-  }
-);
-
-export const toggleUserStatus = createAsyncThunk(
-  "users/toggleUserStatus",
-  async (user, { rejectWithValue }) => {
-    try {
-      const response = await fetch(`/api/users/${user.id}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ status: !user.status }),
-      });
-      const data = await response.json();
-      if (!response.ok) return rejectWithValue("Failed to update user status.");
-      return data.user;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
-
-export const deleteUser = createAsyncThunk(
-  "users/deleteUser",
-  async (userId, { rejectWithValue }) => {
-    try {
-      const response = await fetch(`/api/users/${userId}`, {
-        method: "DELETE",
-      });
-
-      if (!response.ok) return rejectWithValue("Failed to delete user.");
-      return userId;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
-
+//initial data
 const initialState = {
-  users: [],
-  status: "idle", // 'idle' | 'loading' | 'succeeded' | 'failed'
-  usersError: null,
-};
+  users: [
+    {
+      id: 0,
+      name: "test1234",
+      password: "test1234",
+      email: "test@test.com",
+      phoneNumber: "000999777",
+      updatedAt: "01/01/2025",
+      status: true,
+    },
+    {
+      id: 1,
+      name: "Ngô Yến Nhi",
+      password: "12345678",
+      email: "nhimini@gmail.com",
+      phoneNumber: "0368456741",
+      updatedAt: "08/07/2025",
+      status: true,
+    },
+    {
+      id: 2,
+      name: "Đinh Lam Trọng",
+      password: "12345678",
+      email: "zkusi@gmail.com",
+      phoneNumber: "0989554127",
+      updatedAt: "11/02/2025",
+      status: false,
+    },
+    {
+      id: 3,
+      name: "Hoàng Ngọc Bích Thy",
+      password: "12345678",
+      email: "thy.ngoc039@gmail.com",
+      phoneNumber: "0902859857",
+      updatedAt: "03/07/2025",
+      status: false,
+    },
+    {
+      id: 4,
+      name: "Mai Văn Vũ",
+      password: "12345678",
+      email: "vvm_sg@gmail.com",
+      phoneNumber: "036441122",
+      updatedAt: "09/10/2025",
+      status: true,
+    },
+  ],
 
+  status: "idle",
+  error: null,
+};
+//thunks
+// export const addUser = createAsyncThunk(
+//   'users/addUser',
+//   async (something)
+// )
+//slice
 const usersSlice = createSlice({
   name: "users",
   initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchUsers.pending, (state) => {
-        state.status = "loading";
-      })
-      .addCase(fetchUsers.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.users = action.payload;
-      })
-      .addCase(fetchUsers.rejected, (state, action) => {
-        state.status = "failed";
-        state.usersError = action.payload;
-      })
-      .addCase(toggleUserStatus.fulfilled, (state, action) => {
-        const updatedUser = action.payload;
-        const index = state.users.findIndex(
-          (user) => user.id === updatedUser.id
-        );
-        if (index != -1) state.users[index] = updatedUser;
-      })
-      .addCase(toggleUserStatus.rejected, (state, action) => {
-        console.error("Failed to toggle user status: ", action.payload);
-        state.usersError = action.payload;
-      })
-      .addCase(deleteUser.fulfilled, (state, action) => {
-        const deletedUserId = action.payload;
-        state.users = state.users.filter((user) => user.id !== deletedUserId);
-      })
-      .addCase(deleteUser.rejected, (state, action) => {
-        console.error("Failed to delete user: ", action.payload);
-        state.error = action.payload;
-      });
+  reducers: {
+    addUser: (state, action) => {
+      const newUser = action.payload;
+      newUser.id = state.users.length + 2;
+      newUser.updatedAt = new Date().toLocaleDateString();
+      state.users.push(newUser);
+    },
+    getUsers: (state) => {},
+    updateUser: (state, action) => {
+      const updatedUser = {...action.payload};
+      const index = state.users.findIndex((user) => user.id === updatedUser.id);
+      if (index != -1) {
+        updatedUser.updatedAt = new Date().toLocaleDateString();
+        state.users[index] = updatedUser;
+      }
+    },
+    deleteUser: (state, action) => {
+      const deletedUserId = action.payload;
+      state.users = state.users.filter((user) => user.id !== deletedUserId);
+    },
   },
 });
+
+export const { addUser, getUsers, updateUser, deleteUser } = usersSlice.actions;
 
 export default usersSlice.reducer;

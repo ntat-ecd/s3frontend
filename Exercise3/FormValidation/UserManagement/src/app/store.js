@@ -20,6 +20,7 @@ const loadState = () => {
 const saveState = (state) => {
   try {
     const stateToSave = {
+      users: state.users,
       auth: state.auth,
     };
     const serializedState = JSON.stringify(stateToSave);

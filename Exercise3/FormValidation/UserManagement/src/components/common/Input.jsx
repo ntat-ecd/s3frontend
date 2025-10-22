@@ -4,11 +4,13 @@ const Input = ({
   name,
   value = "",
   onChange,
+  onBlur,
   placeholder,
   error,
+  disabled,
 }) => {
   return (
-    <div className="input">
+    <div className="inputSection">
       <label htmlFor={name}>{label}</label>
       <input
         type={type}
@@ -16,7 +18,9 @@ const Input = ({
         name={name}
         value={value}
         onChange={onChange}
+        onBlur={onBlur}
         placeholder={placeholder}
+        disabled={disabled}
       />
       {error && <div className="error">{error}</div>}
     </div>

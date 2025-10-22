@@ -1,10 +1,10 @@
 //LoginForm.jsx
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import Button from "../../components/common/Button";
 import Input from "../../components/common/Input";
 import { useForm } from "../../hooks/useForm";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { loginUser, firstMountCleanup } from "./authSlice";
 
 const INITIAL_STATE = {
@@ -49,14 +49,21 @@ const LoginForm = () => {
   };
 
   //useForm setup
-  const { values, errors, isSubmitting, handleChange, handleSubmit } = useForm({
+  const {
+    values,
+    errors,
+    isSubmitting,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+  } = useForm({
     initialValues: INITIAL_STATE,
     validate,
     onSubmit: handleLogin,
   });
 
   return (
-    <form onSubmit={handleSubmit} id="loginForm" className="loginForm">
+    <form onSubmit={handleSubmit} id="loginForm" className="form">
       <h2>Đăng nhập</h2>
       {authError && <div className="error">{authError}</div>}
       <Input
@@ -64,6 +71,7 @@ const LoginForm = () => {
         name={"userName"}
         value={values.userName}
         placeholder={"Nhập tài khoản"}
+        onBlur={handleBlur}
         onChange={handleChange}
         error={errors.userName}
       />
@@ -73,12 +81,16 @@ const LoginForm = () => {
         name={"userPassword"}
         value={values.userPassword}
         placeholder={"Nhập mật khẩu"}
+        onBlur={handleBlur}
         onChange={handleChange}
         error={errors.userPassword}
       />
       <Button type="submit" disabled={isLoading}>
         {isLoading ? "Đang xử lý" : "Đăng nhập"}
       </Button>
+      <p className="form-link">
+        Chưa có tài khoản? <Link to="/signup">Đăng ký</Link>
+      </p>
     </form>
   );
 };

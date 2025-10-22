@@ -2,17 +2,44 @@ import ActionGroup from "../common/ActionGroup";
 import Button from "../common/Button";
 import Tickbox from "../common/Tickbox";
 import Table from "../table/Table";
-import { fetchUsers, toggleUserStatus, deleteUser } from "../../features/users/usersSlice";
+import {
+  getUsers,
+  updateUser,
+  deleteUser,
+} from "../../features/users/usersSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import ConfirmationModal from "../common/ConfirmationModal";
+import DashboardHeader from "../common/DashboardHeader";
+import UserFormModal from "../../features/users/UserFormModal";
 
 const UserManagementPanel = () => {
   const dispatch = useDispatch();
-  const { users, status, usersError } = useSelector((state) => state.users);
+  const { users, status } = useSelector((state) => state.users);
+  const newId = useSelector((state) => state.users.users.length + 2);
+  const EMPTY_USER = {
+    id: newId,
+    name: "",
+    email: "",
+    phoneNumber: "",
+    status: true,
+  };
+
   //MODAL logic and helper
   const [modalState, setModalState] = useState({ type: null, props: {} });
   const openModal = (type, props) => {
+    // console.log(
+    //   "Modal opened in mode: ",
+    //   type,
+    //   "\nprops: ",
+    //   props,
+    //   "\ntypofprops: ",
+    //   typeof props,
+    //   "\n!props: ",
+    //   !props,
+    //   "\nJSON.stringify(user) === '{}': ",
+    //   JSON.stringify(props) === "{}"
+    // );
     setModalState({ type, props });
   };
   const closeModal = () => {
@@ -21,14 +48,17 @@ const UserManagementPanel = () => {
 
   useEffect(() => {
     if (status === "idle") {
-      dispatch(fetchUsers());
+      dispatch(getUsers());
     }
   }, [status, dispatch]);
 
   //on confirm button clicked
   const handleConfirmToggle = () => {
     const { user } = modalState.props;
-    if (user) dispatch(toggleUserStatus(user));
+    if (user) {
+      const updatedUser = { ...user, status: !user.status };
+      dispatch(updateUser(updatedUser));
+    }
     closeModal();
   };
   //on confirm button clicked
@@ -38,19 +68,45 @@ const UserManagementPanel = () => {
     closeModal();
   };
 
+  const handleAddUser = (formData) => {
+    dispatch(addUser(formData));
+  };
+
+  const handleEditUser = (formData) => {
+    dispatch(updateUser(formData));
+    closeModal()
+  };
+
+  const handleRowClick = (user) => {
+    openModal("view", { user });
+  };
   //headers
   const headers = [
     {
       key: "name",
       title: "Tên",
       width: "2fr",
-      render: (row) => row.name, // plain text
+      render: (row) => (
+        <div className="clickable-cell" onClick={() => handleRowClick(row)}>
+          {row.name}
+        </div>
+      ),
     },
     {
       key: "email",
       title: "Email",
       width: "2fr",
-      render: (row) => row.email,
+      render: (row) => (
+        <div className="clickable-cell" onClick={() => handleRowClick(row)}>
+          {row.email}
+        </div>
+      ),
+    },
+    {
+      key: "phoneNumber",
+      title: "Số điện thoại",
+      width: "1fr",
+      render: (row) => row.phoneNumber,
     },
     {
       key: "updatedAt",
@@ -70,30 +126,47 @@ const UserManagementPanel = () => {
       ),
     },
     {
-      key: "actions",
+      key: "acions",
       title: "Thao tác",
       width: "150px",
       render: (row) => <ActionGroup user={row} onOpenModal={openModal} />,
     },
   ];
 
-  useEffect(() => {
-    console.log(modalState);
-  }, [modalState]);
+  // //DEBUG
+  // useEffect(() => {
+  //   console.log(modalState);
+  // }, [modalState]);
+
   return (
     <>
       <div className="userManagementPanel">
-        <div className="flex flex-row justify-between align-center">
-          <h2>Danh sách</h2>
-          <Button type="addUserBtn">
+        <DashboardHeader title="Danh sách">
+          <Button
+            type="addUserBtn"
+            onClick={() => openModal("add", { user: EMPTY_USER })}
+          >
             <span id="addSign">+</span>
             <span id="addText">Thêm</span>
           </Button>
-        </div>
+        </DashboardHeader>
+
         <Table headers={headers} data={users} />
       </div>
+
+      {/* FORM MODALS */}
+      {(modalState.type === "add" ||
+        modalState.type === "edit" ||
+        modalState.type === "view") && (
+        <UserFormModal
+          mode={modalState.type}
+          user={modalState.props.user}
+          onCancel={closeModal}
+          onSubmit={modalState.type === "add" ? handleAddUser : handleEditUser}
+        />
+      )}
       {modalState.type === "TOGGLE_STATUS" && (
-        <div className="overlay">
+        <div className="overlay" onClick={closeModal}>
           <ConfirmationModal
             onConfirm={handleConfirmToggle}
             onCancel={closeModal}
@@ -108,7 +181,7 @@ const UserManagementPanel = () => {
         </div>
       )}
       {modalState.type === "DELETE_USER" && (
-        <div className="overlay">
+        <div className="overlay" onClick={closeModal}>
           <ConfirmationModal
             onConfirm={handleConfirmDelete}
             onCancel={closeModal}

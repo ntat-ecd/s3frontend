@@ -1,6 +1,6 @@
 import Cell from "./Cell";
 
-const Table = ({ headers, data }) => {
+const Table = ({ headers, data, onRowClick }) => {
   const gridTemplate = headers.map((col) => col.width || "1fr").join(" ");
 
   return (
@@ -9,11 +9,7 @@ const Table = ({ headers, data }) => {
       <div className="table-header">
         {headers.map((col, colIndex) => {
           const isLastRow = colIndex === headers.length - 1;
-          //   console.log(`---TABLE HEADER DEBUGGER---
-          //   headers: ${headers}
-          //   col.length: ${headers.length}
-          //   isLastRow: ${isLastRow}
-          //  `);
+
           return (
             <Cell
               key={col.key}
@@ -34,6 +30,9 @@ const Table = ({ headers, data }) => {
               {headers.map((col, colIndex) => {
                 const isLastRow = colIndex === headers.length - 1;
                 let positionType = "default";
+
+                // console.log(`row: ${row.id}
+                //   col: ${col}`);
                 if (isLastRow && isLastCol) positionType = "row-col-last-child";
                 else if (isLastRow) positionType = "row-last-child";
                 else if (isLastCol) positionType = "col-last-child";
