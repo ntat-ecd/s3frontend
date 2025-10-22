@@ -5,9 +5,11 @@ import Navbar from "../components/layout/Navbar";
 import Sidebar from "../components/layout/Sidebar";
 import UserManagementPanel from "../components/layout/UserManagementPanel";
 import Button from "../components/common/Button";
+import { Outlet } from "react-router-dom";
 
 const Dashboard = () => {
   const [isSidebarHidden, setIsSidebarHidden] = useState(false);
+
   const handleToggleClick = () => {
     setIsSidebarHidden(!isSidebarHidden);
   };
@@ -16,13 +18,13 @@ const Dashboard = () => {
     <div className="dashboard">
       <Navbar>
         <NavToggle isActive={isSidebarHidden} onClick={handleToggleClick} />
-        
+
         <Avatar userPic="/avatar.webp" userName="Capybara" />
-        
       </Navbar>
       <div className="container-row">
         <Sidebar isHidden={isSidebarHidden} />
-        <UserManagementPanel />
+        {/* <UserManagementPanel /> */}
+        <Outlet />
       </div>
     </div>
   );

@@ -117,11 +117,6 @@ const UserManagementPanel = () => {
     },
   ];
 
-  // //DEBUG
-  // useEffect(() => {
-  //   console.log(modalState);
-  // }, [modalState]);
-
   return (
     <>
       <div className="userManagementPanel">

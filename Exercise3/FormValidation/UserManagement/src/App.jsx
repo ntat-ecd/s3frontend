@@ -4,6 +4,8 @@ import LoginPage from "./pages/LoginPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import ProtectedRoute from "./components/common/ProtectedRoute";
 import SignUpPage from "./pages/SignUpPage";
+import UserManagementPanel from "./components/layout/UserManagementPanel";
+import ProductList from "./components/layout/ProductList";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -19,6 +21,16 @@ const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <Dashboard />,
+        children: [
+          {
+            index: true,
+            element: <UserManagementPanel />,
+          },
+          {
+            path: "products",
+            element: <ProductList />,
+          },
+        ],
       },
     ],
   },
