@@ -5,31 +5,9 @@ import Tickbox from "../../components/common/Tickbox";
 import Button from "../../components/common/Button";
 
 const UserFormModal = ({ user, mode, onSubmit, onCancel }) => {
-  console.log("UserFormModal mounted, with parameters: ", user, mode);
+  //console.log("UserFormModal mounted, with parameters: ", user, mode);
   //viewMode
   const isReadOnly = mode === "view";
-
-  const validate = (values) => {
-    const newErrors = {};
-    const specialCharRegex = /[^\w.@]/;
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-    const phoneRegex = /^\d{10,}$/;
-
-    //Name validate
-    if (specialCharRegex.test(values.name))
-      newErrors.name = "Tên đăng nhập không được\nchứa ký tự đặc biệt.";
-    if (!values.name) newErrors.name = "Vui lòng nhập tên đăng nhập.";
-
-    //Email validate
-    if (!emailRegex.test(values.email)) newErrors.email = "Email không hợp lệ.";
-    if (!values.email) newErrors.email = "Vui lòng điền email.";
-    //Phone number validate
-    if (!phoneRegex.test(values.phoneNumber))
-      newErrors.phoneNumber = "Số điện thoại phải có\nít nhất 10 chữ số.";
-    if (!values.phoneNumber)
-      newErrors.phoneNumber = "Vui lòng nhập số điện thoại.";
-    return newErrors;
-  };
 
   const {
     values,
@@ -39,7 +17,7 @@ const UserFormModal = ({ user, mode, onSubmit, onCancel }) => {
     handleBlur,
     handleSubmit,
     setValues,
-  } = useForm({ initialValues: user, validate, onSubmit });
+  } = useForm({ initialValues: user, onSubmit });
 
   useEffect(() => {
     if (user) setValues(user);
@@ -58,39 +36,39 @@ const UserFormModal = ({ user, mode, onSubmit, onCancel }) => {
         <form onSubmit={handleSubmit} className="formModal">
           <Input
             label="ID"
-            name="id"
-            value={values.id}
+            name="userId"
+            value={values.userId}
             onChange={handleChange}
             onBlur={handleBlur}
-            error={errors.id}
+            error={errors.userId}
             disabled={true}
           />
           <Input
             label="Tên"
-            name="name"
-            value={values.name}
+            name="userName"
+            value={values.userName}
             onChange={handleChange}
             onBlur={handleBlur}
-            error={errors.name}
+            error={errors.userName}
             disabled={isReadOnly}
           />
           <Input
             label="Email"
-            name="email"
+            name="userEmail"
             type="email"
-            value={values.email}
+            value={values.userEmail}
             onChange={handleChange}
             onBlur={handleBlur}
-            error={errors.email}
+            error={errors.userEmail}
             disabled={isReadOnly}
           />
           <Input
             label="Số điện thoại"
-            name="phoneNumber"
-            value={values.phoneNumber}
+            name="userPhoneNumber"
+            value={values.userPhoneNumber}
             onChange={handleChange}
             onBlur={handleBlur}
-            error={errors.phoneNumber}
+            error={errors.userPhoneNumber}
             disabled={isReadOnly}
           />
           <div className="form-group">

@@ -12,20 +12,6 @@ const INITIAL_STATE = {
   userPassword: "",
 };
 
-const validate = (values) => {
-  const newErrors = {};
-  const specialCharRegex = /[^\w.@]/;
-  if (specialCharRegex.test(values.userName))
-    newErrors.userName = "Tên đăng nhập không được\nchứa ký tự đặc biệt.";
-  if (!values.userName) newErrors.userName = "Vui lòng nhập tên đăng nhập.";
-
-  if (values.userPassword.length < 8)
-    newErrors.userPassword = "Mật khẩu phải có ít nhất\n8 ký tự.";
-  if (!values.userPassword) newErrors.userPassword = "Vui lòng nhập mật khẩu.";
-
-  return newErrors;
-};
-
 const LoginForm = () => {
   //redux setup
   const dispatch = useDispatch();
@@ -58,7 +44,6 @@ const LoginForm = () => {
     handleSubmit,
   } = useForm({
     initialValues: INITIAL_STATE,
-    validate,
     onSubmit: handleLogin,
   });
 

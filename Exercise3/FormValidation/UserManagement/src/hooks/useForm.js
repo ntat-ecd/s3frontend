@@ -1,32 +1,35 @@
 //useForm.js
 import { useState } from "react";
+import { validateField, validateForm } from "../utils/validate";
 
 //onSubmit = handleLogin
-export const useForm = ({ initialValues, validate, onSubmit }) => {
+export const useForm = ({ initialValues, onSubmit }) => {
   // console.log("useForm called with parameter(s): ", initialValues);
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
-    const { name, value } = e.target; 
+    const { name, value } = e.target;
     setValues({ ...values, [name]: value });
   };
 
   const handleBlur = (e) => {
-    const { name } = e.target;
+    // console.log("HandleBlur called by ", e.target.name);
+    const { name, value } = e.target;
 
-    const validationErrors = validate(values);
-
+    const validationError = validateField(name, value);
+    // console.log("validationErrors: ", validationError);
     setErrors((prevErrors) => ({
       ...prevErrors,
-      [name]: validationErrors[name],
+      [name]: validationError,
     }));
+    // console.log("errors: ", errors);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const validationErrors = validate(values);
+    const validationErrors = validateForm(values);
     // console.log("validationErrors:", validationErrors);
     setErrors(validationErrors);
 
@@ -49,6 +52,6 @@ export const useForm = ({ initialValues, validate, onSubmit }) => {
     handleChange,
     handleBlur,
     handleSubmit,
-    setValues
+    setValues,
   };
 };

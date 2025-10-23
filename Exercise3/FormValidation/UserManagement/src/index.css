@@ -499,8 +499,8 @@ button.submit {
   gap: 20px;
 }
 
-.formModal .error{
-  color:rgb(180, 2, 2)
+.formModal .error {
+  color: rgb(180, 2, 2);
 }
 /* Sidebar */
 .sidebar {
@@ -510,6 +510,7 @@ button.submit {
   align-items: center;
   gap: 10px;
 
+  min-width: 280px;
   width: 280px;
   height: 100%;
 
@@ -524,6 +525,7 @@ button.submit {
   box-sizing: border-box;
 }
 .sidebar.hide {
+  min-width: 0;
   width: 0;
   padding: 0;
   visibility: hidden;
@@ -604,8 +606,8 @@ button.submit {
   justify-content: space-between;
   align-items: center;
 }
-/* UserManagementPanel */
-.userManagementPanel {
+/* Panels */
+.panel {
   display: flex;
   flex: 1;
   flex-direction: column;

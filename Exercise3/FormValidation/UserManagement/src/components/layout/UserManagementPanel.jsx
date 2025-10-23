@@ -119,7 +119,7 @@ const UserManagementPanel = () => {
 
   return (
     <>
-      <div className="userManagementPanel">
+      <div className="panel">
         <DashboardHeader title="Danh sách">
           <Button
             type="addUserBtn"

@@ -20,32 +20,6 @@ const INITIAL_STATE = {
   userPhoneNumber: "",
 };
 
-const validate = (values) => {
-  const newErrors = {};
-  const specialCharRegex = /[^\w.@]/;
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-  const phoneRegex = /^\d{10,}$/;
-
-  //Name validate
-  if (specialCharRegex.test(values.userName))
-    newErrors.userName = "Tên đăng nhập không được\nchứa ký tự đặc biệt.";
-  if (!values.userName) newErrors.userName = "Vui lòng nhập tên đăng nhập.";
-  //Password validate
-  if (values.userPassword.length < 8)
-    newErrors.userPassword = "Mật khẩu phải có ít nhất\n8 ký tự.";
-  if (!values.userPassword) newErrors.userPassword = "Vui lòng nhập mật khẩu.";
-  //Email validate
-  if (!emailRegex.test(values.userEmail))
-    newErrors.userEmail = "Email không hợp lệ.";
-  if (!values.userEmail) newErrors.userEmail = "Vui lòng điền email.";
-  //Phone number validate
-  if (!phoneRegex.test(values.userPhoneNumber))
-    newErrors.userPhoneNumber = "Số điện thoại phải có\nít nhất 10 chữ số.";
-  if (!values.userPhoneNumber)
-    newErrors.userPhoneNumber = "Vui lòng nhập số điện thoại.";
-  return newErrors;
-};
-
 const SignUpForm = () => {
   //redux setup
   const dispatch = useDispatch();
@@ -76,7 +50,6 @@ const SignUpForm = () => {
     handleSubmit,
   } = useForm({
     initialValues: INITIAL_STATE,
-    validate,
     onSubmit: handleRegister,
   });
 
