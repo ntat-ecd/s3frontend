@@ -47,7 +47,7 @@ const UserManagementPanel = () => {
   //on confirm button clicked
   const handleConfirmDelete = () => {
     const { user } = modalState.props;
-    if (user) dispatch(deleteUser(user.id));
+    if (user) dispatch(deleteUser(user.userId));
     closeModal();
   };
 
@@ -165,7 +165,7 @@ const UserManagementPanel = () => {
             onConfirm={handleConfirmDelete}
             onCancel={closeModal}
             confirmText="Xóa"
-          >{`Bạn muốn xóa tài khoản "${modalState.props.user.name}"?`}</ConfirmationModal>{" "}
+          >{`Bạn muốn xóa tài khoản "${modalState.props.user.userName}"?`}</ConfirmationModal>{" "}
         </div>
       )}
     </>
