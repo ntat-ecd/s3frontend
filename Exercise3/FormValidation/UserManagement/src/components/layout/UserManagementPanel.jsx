@@ -155,7 +155,7 @@ const UserManagementPanel = () => {
           >{`${
             modalState.props.user?.status ? "Hủy kích hoạt" : "Kích hoạt"
           } tài khoản "${
-            modalState.props.user.name
+            modalState.props.user.userName
           }"?`}</ConfirmationModal>{" "}
         </div>
       )}
