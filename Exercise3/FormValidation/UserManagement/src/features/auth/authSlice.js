@@ -33,9 +33,9 @@ export const registerUser = createAsyncThunk(
     }
 
     const newUser = {
-      name: userData.userName,
-      password: userData.userPassword,
-      email: userData.userEmail,
+      userName: userData.userName,
+      userPassword: userData.userPassword,
+      userEmail: userData.userEmail,
       status: true,
     };
 
