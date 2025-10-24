@@ -120,7 +120,7 @@ const UserManagementPanel = () => {
   return (
     <>
       <div className="panel">
-        <DashboardHeader title="Danh sách">
+        <DashboardHeader title="Danh sách người dùng">
           <Button
             type="addUserBtn"
             onClick={() => openModal("add", { user: EMPTY_USER })}
