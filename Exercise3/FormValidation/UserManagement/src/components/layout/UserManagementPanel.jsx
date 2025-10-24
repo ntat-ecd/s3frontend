@@ -72,7 +72,7 @@ const UserManagementPanel = () => {
       width: "2fr",
       render: (row) => (
         <div className="clickable-cell" onClick={() => handleRowClick(row)}>
-          {row.name}
+          {row.userName}
         </div>
       ),
     },
@@ -82,7 +82,7 @@ const UserManagementPanel = () => {
       width: "2fr",
       render: (row) => (
         <div className="clickable-cell" onClick={() => handleRowClick(row)}>
-          {row.email}
+          {row.userEmail}
         </div>
       ),
     },
@@ -90,7 +90,7 @@ const UserManagementPanel = () => {
       key: "phoneNumber",
       title: "Số điện thoại",
       width: "1.5fr",
-      render: (row) => row.phoneNumber,
+      render: (row) => row.userPhoneNumber,
     },
     {
       key: "updatedAt",

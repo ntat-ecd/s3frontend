@@ -3,6 +3,7 @@ const ActionGroup = ({ user, onOpenModal }) => {
     onOpenModal("DELETE_USER", { user });
   };
   const handleEditClick = () => {
+    console.log('handleEditClick called with {user}: ', user)
     onOpenModal("edit", { user });
   };
   return (

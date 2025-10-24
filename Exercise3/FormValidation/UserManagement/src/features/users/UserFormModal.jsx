@@ -5,7 +5,7 @@ import Tickbox from "../../components/common/Tickbox";
 import Button from "../../components/common/Button";
 
 const UserFormModal = ({ user, mode, onSubmit, onCancel }) => {
-  //console.log("UserFormModal mounted, with parameters: ", user, mode);
+  console.log("UserFormModal mounted, with parameters: ", user, mode);
   //viewMode
   const isReadOnly = mode === "view";
 

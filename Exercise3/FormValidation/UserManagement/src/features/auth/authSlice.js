@@ -10,7 +10,7 @@ export const loginUser = createAsyncThunk(
     const { userName, userPassword } = credentials;
     // console.log("Credentials: ", credentials, "\nAll users: ", allUsers);
     const foundUser = allUsers.find(
-      (user) => user.name === userName && user.password === userPassword
+      (user) => user.userName === userName && user.userPassword === userPassword
     );
 
     if (foundUser) return foundUser;
