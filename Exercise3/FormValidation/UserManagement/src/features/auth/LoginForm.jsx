@@ -14,6 +14,8 @@ const INITIAL_STATE = {
 
 const LoginForm = () => {
   //redux setup
+  // console.log(useSelector((state) => state.auth));
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isAuthenticated, authError, status } = useSelector(
