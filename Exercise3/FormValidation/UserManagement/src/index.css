@@ -423,6 +423,7 @@ button.submit {
 .table {
   max-width: none;
   width: 95%;
+  height: auto;
   min-width: 850px;
   /* --cols: 200px 150px 150px 150px 100px; */
   --cols: 2fr 2fr 1fr 1fr 1fr;
@@ -434,6 +435,7 @@ button.submit {
   margin-top: 20px;
   margin-left: 40px;
   margin-right: 40px;
+  margin-bottom: 40px;
 }
 
 .table-header,
@@ -610,6 +612,7 @@ button.submit {
 .panel {
   display: flex;
   flex: 1;
+  min-height: 0;
   flex-direction: column;
   width: auto;
   height: 100%;
