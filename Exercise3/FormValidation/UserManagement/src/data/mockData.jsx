@@ -682,7 +682,7 @@ export const mockProductColumns = [
     title: "Product ID",
     dataIndex: "productId",
     key: "productId",
-    width: 120,
+    width: 180,
     fixed: "left",
     sorter: (a, b) => a.productId.localeCompare(b.productId),
   },
@@ -691,14 +691,24 @@ export const mockProductColumns = [
     dataIndex: "productName",
     key: "productName",
     ellipsis: true,
-    width: 180,
-    sorter: (a, b) => a.productName.localeCompare(b.productName),
+
+    filters: [
+      { text: "Mouse", value: "mouse" },
+      { text: "Headset", value: "headset" },
+      { text: "Keyboard", value: "keyboard" },
+    ],
+    filterMode: "menu",
+    filterSearch: true,
+    onFilter: (value, record) =>
+      record.productName.toLowerCase().includes(value),
+    // sorter: (a, b) => a.productName.localeCompare(b.productName),
   },
   {
     title: "Quantity",
     dataIndex: "productQuantity",
     key: "productQuantity",
     align: "right",
+    width: 120,
 
     sorter: (a, b) => a.productQuantity - b.productQuantity,
     render: (qty) => (
@@ -716,8 +726,9 @@ export const mockProductColumns = [
     dataIndex: "productPrice",
     key: "productPrice",
     align: "right",
-    sorter: (a, b) => a.productPrice - b.productPrice,
+    width: 120,
 
+    sorter: (a, b) => a.productPrice - b.productPrice,
     render: (price) => `$${price.toFixed(2)}`,
   },
   {
@@ -725,8 +736,10 @@ export const mockProductColumns = [
     dataIndex: "updatedAt",
     key: "updatedAt",
     align: "center",
+    width: 180,
+
     sorter: (a, b) => dayjs(a.updatedAt).unix() - dayjs(b.updatedAt).unix(),
-   // defaultSortOrder: "descend",
+    // defaultSortOrder: "descend",
     render: (date) => dayjs(date).format("DD-MM-YYYY"),
   },
   {
@@ -734,6 +747,8 @@ export const mockProductColumns = [
     dataIndex: "status",
     key: "status",
     align: "center",
+    width: 180,
+
     filters: [
       { text: "Available", value: "Available" },
       { text: "Low Stock", value: "Low Stock" },
